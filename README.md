@@ -1,6 +1,6 @@
-# Fluent Conf 2017 Workshop: Turbocharged Angular Testing
+# Fluent Conf 2017 Workshop: Turbocharged Testing With Angular
 
-You've been tasked to deliver a high-quality, well-tested dashboard to track The Grid's most prominent hackers!
+You've been tasked to deliver a high-quality, well-tested dashboard to track The Grid's most prominent hackers! We will be learning all about unit testing Angular apps.
 
 ![app](https://raw.githubusercontent.com/victormejia/fluent-angular-testing-workshop/master/screenshots/app-screenshot.png)
 
@@ -44,6 +44,13 @@ The following commands should work:
 `git checkout -b solution`
 
 We will be working on a new branch and working through the modules. In the last module, we will be opening a pull request and using TravisCI to run our builds.
+
+### Exercises and Solution
+The empty exercise files you'll be completing end in `*.spec.ts`. The solutions are right next to the file, which are named `*.specx.ts`. If you to switch between running your specs vs. the solution, in `src/app.test.ts`, change the regex for the specs to:
+
+```js
+const context = require.context('./', true, /\.specx\.ts$/);
+```
 
 </details>
 
@@ -449,7 +456,7 @@ With the setup out of the way, we are now ready to write some tests.
 Complete the following tests:
   * `should set pulse color to green when input is "safe"`
   * `should set pulse color to yellow when input is "warning"`
-  * `should set pulse color to yellow when input is "warning"`
+  * `should set pulse color to red when input is "danger"`
   * `should set pulse color to green when input is undefined`
   * `should output a new message when clicked`
 
@@ -690,14 +697,13 @@ export class NonNumericDirective {
 
   @HostListener('keydown', ['$event'])
   onKeydown(event) {
-    event.preventDefault();
-
     const numberRegex = /[0-9]/;
 
-    if (!numberRegex.test(event.key)) {
-      this.element.nativeElement.value = event.key;
+    if (numberRegex.test(event.key)) {
+      event.preventDefault();
     }
   }
+
 }
 
 ```
@@ -1040,3 +1046,11 @@ In addition, since we have enabled reporting with Codecov, we get a codecov bot 
 
 ![codecov bot](https://raw.githubusercontent.com/victormejia/fluent-angular-testing-workshop/master/screenshots/codecov-bot.png)
 </details>
+
+## Resources
+One of the things I love about the Angular community is its willingness to share awesome content to make your every day developer life even better. This isn't the only resource on testing Angular. I recommend you also check out these awesome resources:
+
+  * [Official Angular Testing Guide](https://angular.io/guide/testing) @ angular.io
+  * ["Angular Testing Guide"](https://medium.com/google-developer-experts/angular-2-testing-guide-a485b6cb1ef0) by Gerard Sans
+  * [Topcoders Angular Testing Workshop](https://github.com/joeeames/TopCoders-angular2-testing) by Joe Eames
+  * [Turbocharge Your Angular Testing Workflow](https://www.youtube.com/watch?v=wj3dStoEhso), talk @ NG-Conf 2017
